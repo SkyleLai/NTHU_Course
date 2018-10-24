@@ -136,7 +136,7 @@ def crawl_course(acixstore, auth_num, cou_codes, ys):
 
 
 def handle_dept_html(html, ys):
-    soup = bs4.BeautifulSoup(html, "lxml")
+    soup = bs4.BeautifulSoup(html, 'html5lib')
     divs = soup.find_all('div', class_='newpage')
 
     for div in divs:

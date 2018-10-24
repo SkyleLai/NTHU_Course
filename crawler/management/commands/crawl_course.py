@@ -29,8 +29,11 @@ class Command(BaseCommand):
     args = ''
     help = 'Help crawl the course data from NTHU.'
 
-    def handle(self, *args, **kwargs):
-        if len(args) == 0:
+    def add_arguments(self, parser):
+        parser.add_argument('--clear', action='store_true')
+
+    def handle(self, *args, **options):
+        if options['clear'] == False:
             import time
             start_time = time.time()
             cou_codes = get_cou_codes()
@@ -51,7 +54,6 @@ class Command(BaseCommand):
                 print('===============================\n')
             elapsed_time = time.time() - start_time
             print('Total %.3f second used.' % elapsed_time)
-        if len(args) == 1:
-            if args[0] == 'clear':
-                Course.objects.all().delete()
-                Department.objects.all().delete()
+        else:
+            Course.objects.all().delete()
+            Department.objects.all().delete()
