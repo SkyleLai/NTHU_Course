@@ -74,7 +74,9 @@ python3 manage.py update_index
 ```
 
 To update all syllabus, use ``python3 manage.py update_syllabus``
+
 To clear all contents in db, use ``python3 manage.py crawl_course --clear``
+
 To wipes out your entire search index, use `python3 manage.py clear_index`
 
 ## Launch
