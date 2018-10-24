@@ -14,7 +14,7 @@ A system that fetch the course data and provide service that is instinctive, eas
 
 - tesseract
     - version: >= 3.03
-    - mac: `brew install tesseract --devel # Without --devel, it will install tesseract 3.02`
+    - mac: `brew install tesseract`
     - ubuntu: `sudo apt-get install tesseract-ocr`
     - arch linux: `sudo pacman -S tesseract tesseract-data-eng`
 
@@ -34,6 +34,15 @@ You can install this package by typing `pip3 install virtualenv` in your console
 
 ## Basic Settings for Database
 
+Create database for models.
+
+```bash
+mysql -u root -p
+CREATE DATABASE `<database name>`;
+CREATE USER '<mysql username>'@'localhost' IDENTIFIED BY '<mysql password>';
+GRANT ALL PRIVILEGES ON <database name>.* TO '<mysql username>'@'localhost';
+```
+
 By default, the system will find a configuration file in `NTHU_Course/mysql.ini`.
 
 So you need to create it and put your settings in this file. The following
@@ -44,8 +53,8 @@ So you need to create it and put your settings in this file. The following
 database = <database name>
 user = <mysql username>
 password = <mysql password>
-host = <mysql server ip>
-port = <mysql server port>
+host = <mysql server ip> ; localhost for local server
+port = <mysql server port> ; which default is 3306
 default-character-set = utf8
 ```
 
@@ -64,10 +73,9 @@ python3 manage.py crawl_course
 python3 manage.py update_index
 ```
 
-To clear all contents in db, use ``python3 manage.py crawl_course clear``
-
 To update all syllabus, use ``python3 manage.py update_syllabus``
-
+To clear all contents in db, use ``python3 manage.py crawl_course --clear``
+To wipes out your entire search index, use `python3 manage.py clear_index`
 
 ## Launch
 
